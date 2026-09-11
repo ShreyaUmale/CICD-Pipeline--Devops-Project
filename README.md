@@ -4,7 +4,7 @@ A cloud-based CI/CD pipeline built to automate testing, building, and deployment
 
 ---
 
-## 📌 Overview
+##  Overview
 
 This project demonstrates a complete DevOps workflow — from code commit to automated deployment — without any manual intervention. Every push to the `main` branch triggers a pipeline that:
 
@@ -16,7 +16,7 @@ This project demonstrates a complete DevOps workflow — from code commit to aut
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Category         | Tools/Technologies      |
 |-------------------|--------------------------|
