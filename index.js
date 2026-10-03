@@ -25,7 +25,7 @@ app.get('/health', (req, res) => {
 app.get('/api/info', (req, res) => {
   res.json({
     project: 'CI/CD Pipeline Demo',
-    technologies: ['GitHub', 'GitHub Actions', 'Docker', 'AWS EC2', 'Nginx'],
+    technologies: ['GitHub', 'GitHub Actions', 'Docker', 'AWS EC2'],
     author: 'Shreya Umale',
     version: '1.0.0'
   });
