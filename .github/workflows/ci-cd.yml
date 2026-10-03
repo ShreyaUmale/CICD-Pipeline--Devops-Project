@@ -9,6 +9,9 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    env:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
     steps:
       - name: Checkout code
@@ -29,22 +32,36 @@ jobs:
         run: npm test
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/devops-pipeline-project:latest .
+        run: docker build -t devops-pipeline-project:latest .
 
       - name: Log in to Docker Hub
+        if: github.event_name == 'push' && env.DOCKERHUB_TOKEN != ''
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-pipeline-project:latest
+        if: github.event_name == 'push' && env.DOCKERHUB_TOKEN != ''
+        run: |
+          docker tag devops-pipeline-project:latest ${{ secrets.DOCKERHUB_USERNAME }}/devops-pipeline-project:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-pipeline-project:latest
+
+      - name: Skip Docker Hub push (secrets not set)
+        if: github.event_name == 'push' && env.DOCKERHUB_TOKEN == ''
+        run: echo "Docker Hub secrets are not set, so the image was built but not pushed."
 
   deploy:
     needs: build-and-test
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    env:
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+
     steps:
       - name: Deploy to EC2 via SSH
+        if: env.EC2_HOST != '' && env.DOCKERHUB_USERNAME != ''
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -55,3 +72,7 @@ jobs:
             docker stop pipeline-app || true
             docker rm pipeline-app || true
             docker run -d --name pipeline-app -p 3000:3000 ${{ secrets.DOCKERHUB_USERNAME }}/devops-pipeline-project:latest
+
+      - name: Skip deploy (EC2 secrets not set)
+        if: env.EC2_HOST == '' || env.DOCKERHUB_USERNAME == ''
+        run: echo "EC2 / Docker Hub secrets are not set, so deployment was skipped."
