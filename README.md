@@ -2,7 +2,6 @@
 
 A beginner-friendly DevOps project that automatically **lints, tests and builds a Docker image** for a Node.js (Express) app every time code is pushed to GitHub.
 
-(https://github.com/ShreyaUmale/CICD-Pipeline--Devops-Project/actions/workflows/REPLACE-WITH-YOUR-WORKFLOW-FILE-NAME.yml/badge.svg)
 
 ---
 
