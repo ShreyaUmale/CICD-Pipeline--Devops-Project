@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
       <head><title>CI/CD Pipeline Demo</title></head>
       <body style="font-family: Arial; text-align: center; margin-top: 100px;">
         <h1>🚀 Hello! My CI/CD Pipeline is Working</h1>
-        <p>Deployed via GitHub Actions + Docker + AWS EC2</p>
+        <p>Built and tested with GitHub Actions + Docker</p>
         <p><a href="/api/info">View API Info</a> | <a href="/api/status">Check Status</a></p>
       </body>
     </html>
@@ -25,7 +25,7 @@ app.get('/health', (req, res) => {
 app.get('/api/info', (req, res) => {
   res.json({
     project: 'CI/CD Pipeline Demo',
-    technologies: ['GitHub', 'GitHub Actions', 'Docker', 'AWS EC2'],
+    technologies: ['Node.js', 'Express', 'GitHub Actions', 'Docker'],
     author: 'Shreya Umale',
     version: '1.0.0'
   });
