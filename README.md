@@ -71,7 +71,8 @@ docker run -p 3000:3000 cicd-demo
 ├── Dockerfile           # Container image definition
 ├── .dockerignore
 ├── eslint.config.js     # Lint rules
-└── package.json
+├── package.json
+└── package-lock.json
 ```
 
 ## What I learned
