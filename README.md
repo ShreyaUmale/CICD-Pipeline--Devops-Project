@@ -1,5 +1,4 @@
 # CI/CD Pipeline – Node.js + Docker + GitHub Actions
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0699aac4-a819-4b00-a540-099e856756b9" />
 
 A beginner-friendly DevOps project that automatically **lints, tests and builds a Docker image** for a Node.js (Express) app every time code is pushed to GitHub.
 
