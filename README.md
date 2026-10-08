@@ -1,4 +1,5 @@
 # CI/CD Pipeline – Node.js + Docker + GitHub Actions
+[![CI/CD Pipeline](https://github.com/ShreyaUmale/CICD-Pipeline--Devops-Project/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/ShreyaUmale/CICD-Pipeline--Devops-Project/actions/workflows/ci-cd.yml)
 
 A beginner-friendly DevOps project that automatically **lints, tests and builds a Docker image** for a Node.js (Express) app every time code is pushed to GitHub.
 
